@@ -1,243 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> wsite</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wsite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
     <style>
-body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    height: 100vh;
-    margin: 0;
-    display: flex;             /* تفعيل نظام التوسيط */
-    align-items: center;       /* يوسط البطاقة عمودياً (فوق وتحت) */
-    justify-content: center;   /* يوسط البطاقة أفقياً (يمين ويسار) */
-    text-align: center;        /* يضمن أن الكلام داخل البطاقة يظل في النص */
-    font-family: 'Segoe UI', sans-serif;
-    }
-    button {
-    background-color: #007bff; /* هذا يغير لون الزر للأزرق الاحترافي */
-    color: white;              /* هذا يغير لون الكتابة داخل الزر للأبيض */
-    padding: 15px 30px;        /* هذا أهم أمر: هو الذي يكبر حجم الزر من الداخل */
-    border: none;              /* هذا يحذف الإطار الأسود القبيح الذي يحيط بالزر */
-    border-radius: 8px;        /* هذا يجعل زوايا الزر دائرية وناعمة بدلاً من حادة */
-    font-size: 18px;           /* هذا يكبر حجم الخط داخل الزر */
-    cursor: pointer;           /* هذا يجعل شكل الماوس يتغير ليد عند التأشير على الزر */
+        body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
 }
-button:hover {
-    background-color: #0056b3; /* هذا لون أزرق أغمق قليلاً */
-    transform: scale(1.05);    /* هذه حركة اختيارية تجعل الزر يكبر قليلاً */
-    transition: 0.3s;          /* هذا يجعل التغيير يحدث بنعومة وليس فجأة */
+        /* إضافة تأثير "التوثيق" (العلامة الزرقاء) بجانب الاسم */
+        .verified-badge::after {
+        content: " ✔";
+        color: #1da1f2; /* لون توثيق تويتر/X */
+        font-size: 18px;
+        vertical-align: middle;
 }
-h1 {
-    margin-top: 50px;      /* مسافة من الأعلى لكي لا يلتصق العنوان بسقف المتصفح */
-    color: #333;           /* تغيير لون العنوان لأسود هادئ */
+        :root {
+        /* الألوان في الوضع الفاتح (الافتراضي) */
+        --main-bg: #f4f7f6;
+        --card-bg: #ffffff;
+        --text-color: #111111;
+        --section-bg: #f9f9f9;
 }
+    :root {
+        /* الألوان في الوضع الداكن (تتغير تلقائياً حسب النظام) */
+        --main-bg: #121212;
+        --card-bg: #1e1e1e;
+        --text-color: #eeeeee;
+        --section-bg: #252525;
+    }   
 
-p {
-    margin-bottom: 30px;   /* مسافة من الأسفل لإبعاد الفقرة عن الزر */
-    line-height: 1.6;      /* توسيع المسافة بين أسطر الكتابة لتسهيل القراءة */
-    color: #555;           /* لون رمادي غامق للفقرة */
-}
-.card {
-    background-color: white;   /* لون الصندوق أبيض */
-    margin: 100px auto;        /* يضع الصندوق في منتصف الشاشة من فوق ومن الجوانب */
-    border-radius: 20px;       /* زوايا دائرية للصندوق */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* ظل خفيف يعطي شعوراً بأن الصندوق طافٍ */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* إطار شفاف جداً يعطي لمسة فخامة */
-    animation: fadeInUp 1s ease-out;
-    position: relative;
-    width: 90%;           /* اجعل البطاقة تأخذ 90% من عرض الشاشة على الجوال */
-    max-width: 450px;     /* لكن على الكمبيوتر، لا تزيد عن 450 بكسل لتبقى أنيقة */
-    padding: 20px;        /* تقليل المسافات الداخلية قليلاً لتوفير مساحة */
-}
 
-.profile-img {
-    width: 100px;           /* تحديد عرض الصورة بـ 100 بكسل فقط */
-    height: 100px;          /* تحديد الطول بـ 100 بكسل لتكون مربعة */
-    border-radius: 50%;     /* هذا هو السر! 50% تحول المربع إلى دائرة كاملة */
-    object-fit: cover;      /* يضمن أن الصورة لا "تتمطط" وتظل متناسقة */
-    border: 3px solid #007bff; /* إطار أزرق خفيف حول الصورة ليميزها */
-    margin-bottom: 20px;    /* مسافة تحت الصورة لكي لا تلمس العنوان */
-}
-/* 1. تنسيق الحاوية التي تجمع الروابط */
-.social-links {
-    margin-top: 25px;      /* مسافة بين الزر الأزرق وبين روابط التواصل */
-    display: flex;         /* تفعيل نظام الصف */
-    justify-content: center; /* وضعهم في منتصف الصندوق */
-    gap: 15px;             /* أهم أمر: يضع مسافة متساوية (15 بكسل) بين كل رابط والثاني */
-}
+        /* [1] الصفحة الأساسية */
+        html, body { 
+            margin: 0; padding: 0; min-height: 100%; width: 100%;
+        }
 
-/* 2. تنسيق شكل الروابط نفسها */
-.social-links a {
-    text-decoration: none; /* حذف الخط الذي يظهر تحت الرابط */
-    color: #555;           /* لون رمادي هادئ */
-    font-size: 14px;       /* حجم خط صغير وأنيق */
-    font-weight: bold;     /* جعل الخط عريض قليلاً */
-    transition: 0.3s;      /* تنعيم الحركة عند اللمس */
-}
+        body {
+            -webkit-font-smoothing: antialiased; /* تجعل الخط أنعم على شاشات الماك والآيفون */
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility; /* تحسن المسافات بين الحروف للقراءة */
+            background: #f4f7f6; /* خلفية هادئة جداً وراقية */
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: flex-start;
+            transition: background 0.5s ease;
+        }
 
-/* 3. تأثير عند تمرير الماوس فوق رابط التواصل */
-.social-links a:hover {
-    color: #764ba2;        /* يتغير اللون للبنفسجي (ليناسب الخلفية) */
-}
-@keyframes fadeInUp {
-    from {
-        opacity: 0;            /* تبدأ البطاقة وهي شفافة تماماً (مختفية) */
-        transform: translateY(30px); /* وتبدأ وهي نازلة تحت مكانها بـ 30 بكسل */
-    }
-    to {
-        opacity: 1;            /* تنتهي وهي واضحة تماماً */
-        transform: translateY(0);    /* وتصل لمكانها الطبيعي */
-    }
-}
-.color-picker {
-    margin-top: 20px;
-}
-.color-picker button {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid white;
-    cursor: pointer;
-    margin: 5px;
-    padding: 0; /* لضمان بقائها دائرية */
-}
+        /* [2] البطاقة الاحترافية */
+        .card {
+            background: var(--card-bg); /* هنا يقرر المتصفح اللون بناءً على وضع الجهاز */
+            color: var(--text-color);
+            width: 90%; max-width: 420px;
+            padding: 45px 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* ظل يبرز البطاقة بوضوح */
+            position: relative; text-align: center; 
+            margin: auto; margin-top: 60px; margin-bottom: 60px;
+            border: 1px solid #eee;
+        }
 
-/* هذا الصندوق الذي يحتوي على الزرين */
-.lang-container {
-    position: absolute;   /* يخلي الأزرار تطير فوق المحتوى ولا تزيحه */
-    top: 15px;            /* مسافة 15 بكسل من أعلى البطاقة */
-    right: 15px;          /* مسافة 15 بكسل من يمين البطاقة */
-    display: flex;        /* يخلي الزرين جنب بعض */
-    gap: 5px;             /* مسافة بسيطة بين الزرين */
-}
+        /* [3] أزرار اللغة - واضحة ومحددة */
+        .lang-container { position: absolute; top: 20px; right: 25px; display: flex; gap: 10px; }
+        .lang-container button {
+            background: #fff; border: 1.5px solid #333; color: #333;
+            padding: 5px 15px; font-size: 13px; border-radius: 8px;
+            cursor: pointer; transition: 0.3s; font-weight: 700;
+        }
+        .lang-container button:hover { background: #333; color: #fff; }
 
-/* شكل الأزرار نفسها */
-.lang-container button {
-    background: rgba(255, 0, 0, 0.5); /* خلفية بيضاء شفافة عشان تناسب أي لون */
-    border: 1px solid #000000;              /* إطار خفيف جداً */
-    padding: 3px 8px;                    /* حجم صغير للزر */
-    font-size: 11px;                     /* خط صغير وأنيق */
-    border-radius: 4px;                  /* زوايا دائرية بسيطة */
-    cursor: pointer;                     /* يخلي الماوس يتحول ليد عند اللمس */
-}
-/* إذا كان عرض الشاشة أقل من 600 بكسل (يعني جوال) */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 22px;   /* نصغر العنوان قليلاً ليناسب الشاشة الصغيرة */
-    }
-    
-    p {
-        font-size: 15px;   /* نصغر الفقرة قليلاً */
-    }
+        /* [4] الصورة الشخصية */
+        .profile-img {
+            width: 115px; height: 115px; border-radius: 50%;
+            object-fit: cover; border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .profile-img:hover { transform: scale(1.08); }
 
-    .social-links {
-        flex-direction: column; /* جعل روابط التواصل تحت بعض بدل جنب بعض ليسهل الضغط عليها */
-        gap: 10px;
-    }
-}
-/* إذا كان جهاز المستخدم مضبوطاً على الوضع الليلي (Dark Mode) */
+        /* [5] النصوص والعناوين - وضوح فائق */
+        h1 { font-size: 26px; color: #111; margin-bottom: 12px; font-weight: 700; }
+        #desc { color: #555; font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
+
+        .about-section {
+            background: #f9f9f9;
+            padding: 20px; border-radius: 15px; margin-bottom: 30px;
+            border-right: 5px solid #007bff; /* لمسة لونية تدل على الاحترافية */
+            text-align: right;
+        }
+        .about-section h3 { margin: 0 0 8px; font-size: 18px; color: #007bff; }
+        .about-section p { margin: 0; font-size: 15px; color: #333; line-height: 1.6; }
+
+        /* [6] الروابط - تصميم جدي مع هوفر ذكي */
+        .social-links a {
+            display: block; background: #fff; color: #222;
+            text-decoration: none; padding: 16px; margin: 12px 0;
+            border-radius: 12px; border: 2px solid #f0f0f0; 
+            font-weight: 700; font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            border-color: #007bff;
+            color: #007bff;
+            background-color: #f0f7ff;
+            transform: translateX(-5px); /* حركة جانبية بسيطة تدل على التفاعل */
+        }
+
+        /* [7] تخصيص الألوان */
+        .color-picker { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        .color-picker-buttons { display: flex; justify-content: center; gap: 15px; }
+        .color-picker button {
+            width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+        .color-picker button:hover { transform: scale(1.25); }
+
+        /* هذا الجزء يجعل الألوان تتغير إذا كان نظام المستخدم "داكن" */
 @media (prefers-color-scheme: dark) {
     body {
-        /* نغير الخلفية المتدرجة لتصبح أغمق وأهدأ للعين */
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        background: #121212; /* خلفية الصفحة تصبح سوداء */
     }
-
     .card {
-        /* نغير لون البطاقة للأبيض المائل للرمادي لتقليل الوميض */
-        background-color: #ffffff; 
-        /* نزيد قوة الظل لتبدو البطاقة بارزة فوق الخلفية الغامقة */
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        background: #1e1e1e; /* البطاقة تصبح رمادي غامق */
+        border-color: #333;
+        color: white; /* النص يصبح أبيض */
+    }
+    h1, #about-text, .social-links a {
+        color: #ffffff; /* توضيح الكتابة في الوضع المظلم */
+    }
+    .social-links a {
+        background: #252525;
+        border-color: #444;
+    }
+    .about-section {
+        background: #252525;
     }
 }
-
-</style>
-
-
+    </style>
 </head>
 <body>
-    <div class="card"> 
+
+    <div class="card">
         <div class="lang-container">
             <button onclick="setLanguage('ar')">عربي</button>
             <button onclick="setLanguage('en')">EN</button>
         </div>
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-img" alt="صورة المستخدم">
+
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-img" alt="User Image">
+
         <h1 id="title">أهلاً بك في عالمي الرقمي</h1>
+        
+        <div class="about-section" id="about-box">
+            <h3 id="about-title">نبذة عني</h3>
+            <p id="about-text">أنا مبرمج طموح، مهتم بتطوير الألعاب وصناعة المحتوى الرقمي. أشارككم هنا رحلتي في تعلم البرمجة وأحدث أعمالي.</p>
+        </div>
+
         <p id="desc">أنا أتعلم الآن كيف أبني موقعي الخاص خطوة بخطوة.</p>
-        <a href="http://www.youtube.com/@DARK_D-f6q">
-    <button>زيارة قناتي على يوتيوب</button>
-</a>
-    <div class="social-links">
-        <a href="http://www.youtube.com/@DARK_D-f6q" id="yt-link">قناتي في يوتيوب</a>
-        <a href="رابط_حسابك_هنا" id="x-link">حسابي في X</a>
-        <a href="رابط_لعبتك_هنا" id="game-link">لعبتي الخاصة</a>
 
-</div>
-<div class="color-picker">
-    <p>اختر ثيم الموقع:</p>
-    <button onclick="changeColor('#667eea', '#764ba2')" style="background: #667eea;"></button>
-    <button onclick="changeColor('#ff7e5f', '#feb47b')" style="background: #ff7e5f;"></button>
-    <button onclick="changeColor('#2af598', '#009efd')" style="background: #2af598;"></button>
-    <button onclick="changeColor('#ff9a9e', '#fecfef')" style="background: #ff9a9e;"></button>
-    <button onclick="changeColor('#00dbde', '#fc00ff')" style="background: #00dbde;"></button>
-    <button onclick="changeColor('#434343', '#000000')" style="background: #434343;"></button>
+        <div class="social-links">
+            <a href="http://www.youtube.com/@DARK_D-f6q" id="yt-link" target="_blank">قناتي في يوتيوب</a>
+            <a href="twitter_account.html" id="x-link">حسابي في X</a>
+            <a href="my_game.html" id="game-link">لعبتي الخاصة</a>
+        </div>
 
-    
-</div>
+        <div class="color-picker">
+            <div class="color-picker-buttons">
+                <button onclick="changeColor('#667eea', '#764ba2')" style="background: #667eea;"></button>
+                <button onclick="changeColor('#2c3e50', '#000000')" style="background: #2c3e50;"></button>
+                <button onclick="changeColor('#1a2a6c', '#b21f1f')" style="background: #1a2a6c;"></button>
+                <button onclick="changeColor('#11998e', '#38ef7d')" style="background: #11998e;"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeColor(c1, c2) {
+            document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+            localStorage.setItem('theme', JSON.stringify({c1, c2}));
+        }
+
+        function setLanguage(lang) {
+            localStorage.setItem('lang', lang);
+            applyLanguage(lang);
+        }
+
+        function applyLanguage(lang) {
+            const t = {
+                ar: { 
+                    title: "أهلاً بك في عالمي الرقمي", 
+                    aboutT: "نبذة عني", 
+                    aboutP: "أنا مبرمج طموح، مهتم بتطوير الألعاب وصناعة المحتوى الرقمي. أشارككم هنا رحلتي في تعلم البرمجة وأحدث أعمالي.", 
+                    desc: "أنا أتعلم الآن كيف أبني موقعي الخاص خطوة بخطوة.", 
+                    yt: "قناتي في يوتيوب", 
+                    x: "حسابي في X", 
+                    game: "لعبتي الخاصة", 
+                    dir: "rtl",
+                    align: "right",
+                    border: "border-right"
+                },
+                en: { 
+                    title: "Welcome to My Digital World", 
+                    aboutT: "About Me", 
+                    aboutP: "I am an aspiring developer interested in game development and content creation. Here I share my coding journey.", 
+                    desc: "I am learning how to build my website step by step.", 
+                    yt: "YouTube Channel", 
+                    x: "X Account", 
+                    game: "My Special Game", 
+                    dir: "ltr",
+                    align: "left",
+                    border: "border-left"
+                }
+            }[lang];
+
+            document.getElementById('title').innerText = t.title;
+            document.getElementById('about-title').innerText = t.aboutT;
+            document.getElementById('about-text').innerText = t.aboutP;
+            document.getElementById('desc').innerText = t.desc;
+            document.getElementById('yt-link').innerText = t.yt;
+            document.getElementById('x-link').innerText = t.x;
+            document.getElementById('game-link').innerText = t.game;
+            
+            document.body.style.direction = t.dir;
+            const aboutBox = document.getElementById('about-box');
+            aboutBox.style.textAlign = t.align;
+            
+            // تعديل مكان الخط الأزرق حسب اللغة
+            if(lang === 'en') {
+                aboutBox.style.borderRight = "none";
+                aboutBox.style.borderLeft = "5px solid #007bff";
+            } else {
+                aboutBox.style.borderLeft = "none";
+                aboutBox.style.borderRight = "5px solid #007bff";
+            }
+        }
+
+        window.onload = () => {
+            const theme = JSON.parse(localStorage.getItem('theme'));
+            if (theme) changeColor(theme.c1, theme.c2);
+            applyLanguage(localStorage.getItem('lang') || 'ar');
+        };
+    </script>
 </body>
-<script>
-    function changeColor(color1, color2) {
-    // 1. تنفيذ التغيير الفعلي للخلفية كما كنا نفعل
-    document.body.style.background = "linear-gradient(135deg, " + color1 + " 0%, " + color2 + " 100%)";
-
-    // 2. "حفظ" الألوان في ذاكرة المتصفح الصغيرة
-    localStorage.setItem('savedColor1', color1);
-    localStorage.setItem('savedColor2', color2);
-}
-// هذا الكود يعمل تلقائياً بمجرد فتح الصفحة
-window.onload = function() {
-    // 1. محاولة قراءة الألوان المحفوظة من الذاكرة
-    const c1 = localStorage.getItem('savedColor1');
-    const c2 = localStorage.getItem('savedColor2');
-
-    // 2. إذا وجدنا ألواناً محفوظة (يعني المستخدم غيرها سابقاً)
-    if (c1 && c2) {
-        document.body.style.background = "linear-gradient(135deg, " + c1 + " 0%, " + c2 + " 100%)";
-    }
-};
-    function setLanguage(lang) {
-    const titleElement = document.getElementById('title');
-    const descElement = document.getElementById('desc');
-    
-    // أسماء الروابط الجديدة
-    const yt = document.getElementById('yt-link');
-    const x = document.getElementById('x-link');
-    const game = document.getElementById('game-link');
-
-    if (lang === 'en') {
-        titleElement.innerText = "Welcome to my digital world";
-        descElement.innerText = "I am learning how to build my website step by step.";
-        
-        // ترجمة الروابط للإنجليزي
-        yt.innerText = "YouTube Channel";
-        x.innerText = "X Account";
-        game.innerText = "My Game";
-        
-        document.body.style.direction = "ltr"; 
-    } else {
-        titleElement.innerText = "أهلاً بك في عالمي الرقمي";
-        descElement.innerText = "أنا أتعلم الآن كيف أبني موقعي الخاص خطوة بخطوة.";
-        
-        // إرجاع الروابط للعربي
-        yt.innerText = "قناتي في يوتيوب";
-        x.innerText = "حسابي في X";
-        game.innerText = "لعبتي الخاصة";
-        
-        document.body.style.direction = "rtl";
-    }
-}
-</script>
 </html>
