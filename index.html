@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. نظام الألوان المتناسق */
         :root {
             --primary: #2563eb;
             --bg-body: #f8fafc;
@@ -31,65 +30,61 @@
             --shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
-        /* 2. تحسينات عامة */
         * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.8; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.8; overflow-x: hidden; }
 
-        /* 3. شريط التقدم */
         #progress-bar { position: fixed; top: 0; right: 0; height: 3px; background: var(--primary); z-index: 3000; width: 0%; }
 
-        /* 4. الناف بار الاحترافي */
         .navbar {
             position: fixed; top: 0; width: 100%; z-index: 2500;
             background: var(--nav-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border); padding: 12px 8%;
+            border-bottom: 1px solid var(--border); padding: 12px 5%;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-weight: 900; font-size: 1.6rem; color: var(--primary); letter-spacing: -1px; }
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 0.95rem; }
-        .nav-links a:hover { color: var(--primary); }
+        
+        .logo { font-weight: 900; font-size: 1.5rem; color: var(--primary); letter-spacing: -1px; }
+        
+        .nav-controls { display: flex; align-items: center; gap: 10px; }
 
         .container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; }
 
-        /* 5. الهيرو (رأس الصفحة) */
-        .hero { text-align: center; padding: 50px 0; }
-        .hero-avatar {
-            width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--primary);
-            padding: 5px; background: var(--bg-card); display: inline-block;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
-        }
-        .hero h1 { font-size: 3rem; font-weight: 900; margin: 20px 0 10px; }
+        .hero { text-align: center; padding: 40px 0; }
+        .hero h1 { font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; margin-bottom: 10px; }
 
-        /* 6. الأقسام الجديدة */
         .site-section {
-            background: var(--bg-card); border-radius: 28px; padding: 45px;
+            background: var(--bg-card); border-radius: 24px; padding: clamp(20px, 5vw, 45px);
             margin-bottom: 30px; border: 1px solid var(--border); box-shadow: var(--shadow);
         }
-        .section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-        .section-title::after { content: ""; height: 3px; flex-grow: 1; background: var(--border); border-radius: 10px; }
+        
+        .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .section-title::after { content: ""; height: 2px; flex-grow: 1; background: var(--border); border-radius: 10px; }
 
-        /* 7. شبكة الروابط التفاعلية */
-        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; }
+        
         .link-item {
-            display: flex; align-items: center; justify-content: space-between; padding: 22px;
-            background: var(--bg-body); border-radius: 20px; text-decoration: none;
+            display: flex; align-items: center; justify-content: space-between; padding: 20px;
+            background: var(--bg-body); border-radius: 18px; text-decoration: none;
             color: var(--text-main); font-weight: 700; border: 1px solid var(--border);
         }
-        .link-item:hover { transform: translateY(-5px) scale(1.02); background: var(--primary); color: white; border-color: var(--primary); }
-        .link-item i { font-size: 1.5rem; }
+        .link-item:hover { transform: translateY(-3px); border-color: var(--primary); background: var(--bg-card); box-shadow: var(--shadow); }
+        .link-item i { font-size: 1.3rem; color: var(--primary); }
 
-        /* 8. أزرار التحكم والوضع */
         .control-btn {
-            width: 45px; height: 45px; border-radius: 12px; border: 1px solid var(--border);
+            height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border);
             display: flex; align-items: center; justify-content: center; cursor: pointer;
-            background: var(--bg-card); color: var(--text-main);
+            background: var(--bg-card); color: var(--text-main); font-family: 'Cairo', sans-serif; font-weight: 700; font-size: 0.8rem; gap: 5px;
         }
+        .control-btn:hover { border-color: var(--primary); color: var(--primary); }
 
-        footer { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.85rem; }
 
-        @media (max-width: 650px) { .nav-links { display: none; } }
+        /* دعم الجوال */
+        @media (max-width: 480px) {
+            .navbar { padding: 10px 15px; }
+            .logo { font-size: 1.2rem; }
+            .control-btn span { display: none; } /* إخفاء النص في الجوال الصغير لبقاء الشكل متناسق */
+        }
     </style>
 </head>
 <body>
@@ -98,42 +93,44 @@
 
     <nav class="navbar">
         <div class="logo">DARK_D</div>
-        <ul class="nav-links">
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#about">النبذة</a></li>
-            <li><a href="#links">الروابط</a></li>
-        </ul>
-        <div class="control-btn" id="theme-toggle"><i class="fas fa-moon"></i></div>
+        <div class="nav-controls">
+            <div class="control-btn" id="lang-toggle">
+                <i class="fas fa-globe"></i>
+                <span id="lang-text">English</span>
+            </div>
+            <div class="control-btn" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
     </nav>
 
     <div class="container">
         <header class="hero" id="home">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="hero-avatar" alt="DARK_D Profile">
-            <h1>DARK_D</h1>
-            <p style="color: var(--text-muted); font-size: 1.2rem; font-weight: 600;">صناعة المحتوى.. فن برمجته</p>
+            <h1 id="hero-title">DARK_D</h1>
+            <p id="hero-desc" style="color: var(--text-muted); font-weight: 600;">صناعة المحتوى.. فن برمجته</p>
         </header>
 
-        <section class="site-section" id="about">
-            <h2 class="section-title">من أنا</h2>
-            <p>أنا مبرمج ومطور ألعاب مهتم بخلق تجارب بصرية وتقنية متكاملة. هدفي هو بناء محتوى رقمي يترك أثراً، سواء من خلال الألعاب التي أطورها أو الدروس التي أقدمها.</p>
+        <section class="site-section">
+            <h2 class="section-title" id="about-title">من أنا</h2>
+            <p id="about-content">أنا مبرمج ومطور ألعاب مهتم بصناعة تجارب بصرية وتقنية متكاملة. هدفي هو بناء محتوى رقمي يترك أثراً، سواء من خلال الألعاب التي أطورها أو المحتوى.</p>
         </section>
 
-        <section class="site-section" id="links">
-            <h2 class="section-title">الروابط</h2>
+        <section class="site-section">
+            <h2 class="section-title" id="links-title">الروابط</h2>
             <div class="links-grid">
                 
-                <a href="#" class="link-item" target="_blank">
-                    <span>تجربة اللعبة الخاصة</span>
+                <a href="https://dark-wsite.itch.io/the-dark" class="link-item" target="_blank">
+                    <span id="link-game">تجربة اللعبة الخاصة</span>
                     <i class="fas fa-gamepad"></i>
                 </a>
 
                 <a href="http://www.youtube.com/@DARK_D-f6q" class="link-item" target="_blank">
-                    <span>قناة يوتيوب الرسمية</span>
+                    <span id="link-yt">قناة يوتيوب الرسمية</span>
                     <i class="fab fa-youtube"></i>
                 </a>
 
                 <a href="#" class="link-item" target="_blank">
-                    <span>حسابي في منصة X</span>
+                    <span id="link-x">حسابي في منصة X</span>
                     <i class="fab fa-x-twitter"></i>
                 </a>
 
@@ -141,38 +138,92 @@
         </section>
 
         <footer>
-            <p>© 2026 تم الإنجاز بواسطة <b style="color: var(--primary)">DARK_D</b></p>
+            <p id="footer-text">© 2026 تم الإنجاز بواسطة <b style="color: var(--primary)">DARK_D</b></p>
         </footer>
     </div>
 
     <script>
-        // نظام شريط التقدم
+        // 1. نظام النصوص للغتين
+        const translations = {
+            ar: {
+                heroTitle: "DARK_D",
+                heroDesc: "صناعة المحتوى.. فن برمجته",
+                aboutTitle: "من أنا",
+                aboutContent: "أنا مبرمج ومطور ألعاب مهتم بصناعة تجارب بصرية وتقنية متكاملة. هدفي هو بناء محتوى رقمي يترك أثراً، سواء من خلال الألعاب التي أطورها أو المحتوى.",
+                linksTitle: "الروابط",
+                linkGame: "تجربة اللعبة الخاصة",
+                linkYt: "قناة يوتيوب الرسمية",
+                linkX: "حسابي في منصة X",
+                footer: "© 2026 تم الإنجاز بواسطة ",
+                langBtn: "English"
+            },
+            en: {
+                heroTitle: "DARK_D",
+                heroDesc: "Content Creation.. The Art of Coding",
+                aboutTitle: "About Me",
+                aboutContent: "I am a programmer and game developer interested in creating integrated visual and technical experiences. My goal is to build digital content that leaves an impact.",
+                linksTitle: "Links",
+                linkGame: "Try My Private Game",
+                linkYt: "Official YouTube Channel",
+                linkX: "My X Platform Account",
+                footer: "© 2026 Created by ",
+                langBtn: "العربية"
+            }
+        };
+
+        // 2. إدارة اللغة
+        const langToggle = document.getElementById('lang-toggle');
+        let currentLang = localStorage.getItem('lang') || 'ar';
+
+        const applyLang = (lang) => {
+            const t = translations[lang];
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.getElementById('hero-title').textContent = t.heroTitle;
+            document.getElementById('hero-desc').textContent = t.heroDesc;
+            document.getElementById('about-title').textContent = t.aboutTitle;
+            document.getElementById('about-content').textContent = t.aboutContent;
+            document.getElementById('links-title').textContent = t.linksTitle;
+            document.getElementById('link-game').textContent = t.linkGame;
+            document.getElementById('link-yt').textContent = t.linkYt;
+            document.getElementById('link-x').textContent = t.linkX;
+            document.getElementById('footer-text').innerHTML = `${t.footer} <b style="color: var(--primary)">DARK_D</b>`;
+            document.getElementById('lang-text').textContent = t.langBtn;
+            
+            localStorage.setItem('lang', lang);
+        };
+
+        langToggle.onclick = () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            applyLang(currentLang);
+        };
+
+        // 3. نظام الألوان وشريط التقدم
         window.onscroll = () => {
             let winScroll = document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById("progress-bar").style.width = (winScroll / height) * 100 + "%";
         };
 
-        // نظام تبديل الألوان (تلقائي + يدوي)
-        const toggle = document.getElementById('theme-toggle');
-        const icon = toggle.querySelector('i');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
 
         const applyTheme = (theme) => {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
-            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         };
 
-        // التعرف على النمط المفضل (نظام المستخدم أو الاختيار السابق)
-        const savedTheme = localStorage.getItem('theme') || 
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
-        applyTheme(savedTheme);
-
-        toggle.onclick = () => {
+        themeToggle.onclick = () => {
             const current = document.documentElement.getAttribute('data-theme');
             applyTheme(current === 'dark' ? 'light' : 'dark');
         };
+
+        // تنفيذ اللغة عند التحميل
+        applyLang(currentLang);
     </script>
 </body>
 </html>
